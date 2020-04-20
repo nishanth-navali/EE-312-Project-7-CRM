@@ -6,6 +6,7 @@
  */
 
 #include <stdio.h>
+#include <iostream>
 #include "UTString.h"
 #include "Customer.h"
 #include "CustomerDB.h"
@@ -95,6 +96,29 @@ Customer* findMax(UTString type) {
 
 void processPurchase() {
     // not done, your effort goes here
+    // TODO: See if this is correct
+    UTString cname;
+    UTString item_name;
+    int purchase;
+
+    readString(&cname);
+    readString(&item);
+    readNum(&purchase);
+
+    if(purchase < 0) {
+
+    }
+    else {
+        int* item = selectInventItem(&item_name);
+        if(*item < purchase) {
+            // TODO: Print the error
+        }
+        else {
+            *item -= purchase;
+            *selectInventItem(item_name, database[cname]) += purchase;
+        }
+    }
+    // TODO: Destroy everything and return
 }
 
 void processSummarize() {
