@@ -34,8 +34,6 @@ CustomerDB::~CustomerDB(void) { // done, please do not edit
     delete[] this->data;
 }
 
-
-
 void CustomerDB::clear(void) { // done, please do not edit
     delete[] this->data;
     this->capacity = default_capacity;

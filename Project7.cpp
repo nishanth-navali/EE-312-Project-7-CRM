@@ -95,7 +95,7 @@ Customer* findMax(UTString type) {
 }
 
 void processPurchase() {
-    // not done, your effort goes here
+
     // TODO: See if this is correct
     UTString cname;
     UTString item_name;
@@ -121,10 +121,46 @@ void processPurchase() {
     // TODO: Destroy everything and return
 }
 
+void printZero(item_name) {
+    // TODO: print "no one has purchased any ___"
+}
+
+void summarizeHelper(UTString item_name) {
+    if(database.size() == 0) {
+        printZero(item_name);
+    }
+    else {
+        Customer max = database.data[i];
+        for(Customer c : database.data) {
+            if(*selectInventItem(item_name, c) > *selectInventItem(item_name, max)) {
+                max = c;
+            }
+        }
+        if(*selectInventItem(item_name, max) == 0) {
+            // TODO: make this
+        }
+    }
+}
+
 void processSummarize() {
-    // not done, your effort goes here
+    // TODO: change to C++
+    printf("There are %d Bottles, %d Diapers and %d Rattles in inventory\n",
+           num_bottles, num_diapers, num_rattles);
+    printf("we have had a total of %d different customers\n", database.size() - 1);
+
+
 }
 
 void processInventory() {
-    // not done, your effort goes here
+    UTString item_name;
+    int new_stock;
+
+    readString(&item_name);
+    readNum(&new_stock);
+
+    if(new_stock >= 0) {
+        int* item = selectInventItem(&item_name);
+        *item += new_stock;
+    }
+    // TODO: Destroy everything and return
 }
