@@ -83,11 +83,13 @@ void readInput(const char* file_name) {
 }
 
 int main(void) {
-    readInput("test1.txt");
-    reset();
-    readInput("test2.txt");
-    reset();
-    readInput("test3.txt");
+//    readInput("test1.txt");
+//    reset();
+//    readInput("test2.txt");
+//    reset();
+//    readInput("test3.txt");
+//    reset();
+    readInput("test4.txt");
     reset();
     return 0;
 }

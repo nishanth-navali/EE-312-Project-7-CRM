@@ -147,8 +147,8 @@ void summarizeHelper(UTString item_name) {
 
 void processSummarize() {
     std::cout << "There are " << num_bottles << " Bottles, "
-    << num_diapers << " Diapers, and " << num_rattles << " Rattles in inventory" << endl;
-    std::cout << "we have a total of " << database.size() << " different customers" << endl;
+    << num_diapers << " Diapers and " << num_rattles << " Rattles in inventory" << endl;
+    std::cout << "we have had a total of " << database.size() << " different customers" << endl;
 
     summarizeHelper("Bottles");
     summarizeHelper("Diapers");

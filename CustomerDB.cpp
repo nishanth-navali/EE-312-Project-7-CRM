@@ -49,7 +49,7 @@ Customer& CustomerDB::operator[](int k) { // done, please do not edit
 Customer& CustomerDB::operator[](UTString name) { // not done, your effort goes here
     if(isMember(name)) {
         for(int i = 0; i < this->length; i++) {
-            if(this->data[i].name == name) {
+            if(this->data[i].name.operator==(name)) {
                 return this->data[i];
             }
         }
@@ -64,7 +64,8 @@ Customer& CustomerDB::operator[](UTString name) { // not done, your effort goes 
             delete[] this->data;
             this->data = new_data;
         }
-        this->data[this->length].name = name;
+        Customer new_cust(name);
+        this->data[this->length] = new_cust;
         this->length++;
         return this->data[this->length - 1];
     }
