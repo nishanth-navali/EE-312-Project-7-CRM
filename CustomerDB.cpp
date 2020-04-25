@@ -49,14 +49,14 @@ Customer& CustomerDB::operator[](int k) { // done, please do not edit
 Customer& CustomerDB::operator[](UTString name) { // not done, your effort goes here
     if(isMember(name)) {
         for(int i = 0; i < this->length; i++) {
-            if(this->data[i]->name == name) {
-                return &this->data[i];
+            if(this->data[i].name == name) {
+                return this->data[i];
             }
         }
     }
     else {
-        if(this->length == this->capacity - 1) {
-            Customer* new_data = new Customer[capacity * 2];
+        if(this->length == this->capacity) {
+            Customer* new_data = new Customer[this->capacity * 2];
             this->capacity *= 2;
             for(int i = 0; i < this->length; i++) {
                 new_data[i] = this->data[i];
@@ -64,16 +64,15 @@ Customer& CustomerDB::operator[](UTString name) { // not done, your effort goes 
             delete[] this->data;
             this->data = new_data;
         }
-        this->data[this->length] = new Customer[];
         this->data[this->length].name = name;
         this->length++;
-        return &this->data[this->length - 1];
+        return this->data[this->length - 1];
     }
 }
 
 bool CustomerDB::isMember(UTString name) { // not done, your effort goes here
     for(int i = 0; i < this->length; i++) {
-        if(this->data[i]->name == name) {
+        if(this->data[i].name == name) {
             return true;
         }
     }

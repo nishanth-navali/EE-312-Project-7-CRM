@@ -11,6 +11,8 @@
 #include "Customer.h"
 #include "CustomerDB.h"
 
+using namespace std;
+
 void readString(UTString&);
 void readNum(int&);
 
@@ -95,34 +97,31 @@ Customer* findMax(UTString type) {
 }
 
 void processPurchase() {
-
-    // TODO: See if this is correct
     UTString cname;
     UTString item_name;
     int purchase;
 
-    readString(&cname);
-    readString(&item);
-    readNum(&purchase);
+    readString(cname);
+    readString(item_name);
+    readNum(purchase);
 
     if(purchase < 0) {
 
     }
     else {
-        int* item = selectInventItem(&item_name);
+        int* item = selectInventItem(item_name);
         if(*item < purchase) {
-            // TODO: Print the error
+            std::cout << "Sorry " << cname.c_str() << " we only have " << *item << " " << item_name.c_str() << endl;
         }
         else {
             *item -= purchase;
             *selectInventItem(item_name, database[cname]) += purchase;
         }
     }
-    // TODO: Destroy everything and return
 }
 
-void printZero(item_name) {
-    // TODO: print "no one has purchased any ___"
+void printZero(UTString item_name) {
+    std::cout << "no one has purchased any " << item_name.c_str() << endl;
 }
 
 void summarizeHelper(UTString item_name) {
@@ -130,23 +129,30 @@ void summarizeHelper(UTString item_name) {
         printZero(item_name);
     }
     else {
-        Customer max = database.data[i];
-        for(Customer c : database.data) {
-            if(*selectInventItem(item_name, c) > *selectInventItem(item_name, max)) {
-                max = c;
+        Customer max = database[0];
+        for(int i = 1; i < database.size(); i++) {
+            if(*selectInventItem(item_name, database[i]) > *selectInventItem(item_name, max)) {
+                max = database[i];
             }
         }
         if(*selectInventItem(item_name, max) == 0) {
-            // TODO: make this
+            printZero(item_name);
+        }
+        else {
+            std::cout << max.name.c_str() << " has purchased the most " << item_name.c_str()
+            << " (" << *selectInventItem(item_name, max) << ")" << endl;
         }
     }
 }
 
 void processSummarize() {
-    // TODO: change to C++
-    printf("There are %d Bottles, %d Diapers and %d Rattles in inventory\n",
-           num_bottles, num_diapers, num_rattles);
-    printf("we have had a total of %d different customers\n", database.size() - 1);
+    std::cout << "There are " << num_bottles << " Bottles, "
+    << num_diapers << " Diapers, and " << num_rattles << " Rattles in inventory" << endl;
+    std::cout << "we have a total of " << database.size() << " different customers" << endl;
+
+    summarizeHelper("Bottles");
+    summarizeHelper("Diapers");
+    summarizeHelper("Rattles");
 
 
 }
@@ -155,12 +161,11 @@ void processInventory() {
     UTString item_name;
     int new_stock;
 
-    readString(&item_name);
-    readNum(&new_stock);
+    readString(item_name);
+    readNum(new_stock);
 
     if(new_stock >= 0) {
-        int* item = selectInventItem(&item_name);
+        int* item = selectInventItem(item_name);
         *item += new_stock;
     }
-    // TODO: Destroy everything and return
 }
